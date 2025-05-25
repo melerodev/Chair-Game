@@ -4,6 +4,8 @@ import io.github.melerodev.chairgame.ChairGame;
 import io.github.melerodev.chairgame.Reloadable;
 import io.github.milkdrinkers.crate.Config;
 
+import java.io.File;
+
 /**
  * A class that generates/loads {@literal &} provides access to a configuration file.
  */
@@ -23,9 +25,20 @@ public class ConfigHandler implements Reloadable {
 
     @Override
     public void onLoad(ChairGame plugin) {
-        cfg = new Config("config", plugin.getDataFolder().getPath(), plugin.getResource("config.yml")); // Create a config file from the template in our resources folder
+        File configFile = new File(plugin.getDataFolder(), "config.yml");
+        if (configFile.exists()) configFile.delete();
+        cfg = new Config("config", plugin.getDataFolder().getPath(), plugin.getResource("config.yml")); // Crear archivo de config desde el template
+
+        File databaseFile = new File(plugin.getDataFolder(), "database.yml");
+        if (databaseFile.exists()) databaseFile.delete();
         databaseCfg = new Config("database", plugin.getDataFolder().getPath(), plugin.getResource("database.yml"));
     }
+
+//    @Override
+//    public void onLoad(ChairGame plugin) {
+//        cfg = new Config("config", plugin.getDataFolder().getPath(), plugin.getResource("config.yml")); // Crear archivo de config desde el template
+//        databaseCfg = new Config("database", plugin.getDataFolder().getPath(), plugin.getResource("database.yml"));
+//    }
 
     @Override
     public void onEnable(ChairGame plugin) {

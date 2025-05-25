@@ -31,6 +31,7 @@ public class ListenerHandler implements Reloadable {
     public void onEnable(ChairGame plugin) {
         listeners.clear(); // Clear the list to avoid duplicate listeners when reloading the plugin
 //        listeners.add(new ExampleListener());
+        listeners.add(new ListenerSignInteract());
 
         // Register listeners here
         for (Listener listener : listeners) {

@@ -37,6 +37,7 @@ public class CommandHandler implements Reloadable {
 
         // Register commands here
         new ExampleCommand();
+        new ChairGameCommand();
     }
 
     @Override

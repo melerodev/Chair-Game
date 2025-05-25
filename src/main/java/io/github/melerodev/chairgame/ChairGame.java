@@ -12,6 +12,7 @@ import io.github.melerodev.chairgame.updatechecker.UpdateHandler;
 import io.github.melerodev.chairgame.utility.DB;
 import io.github.melerodev.chairgame.utility.Logger;
 import io.github.milkdrinkers.colorparser.ColorParser;
+import io.github.milkdrinkers.wordweaver.Translation;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -50,8 +51,6 @@ public class ChairGame extends JavaPlugin {
     @Override
     public void onLoad() {
         instance = this;
-
-
         configHandler = new ConfigHandler(this);
         translationHandler = new TranslationHandler(configHandler);
         databaseHandler = new DatabaseHandlerBuilder()
@@ -104,6 +103,11 @@ public class ChairGame extends JavaPlugin {
         onDisable();
         onLoad();
         onEnable();
+    }
+
+    public void reloadConfig() {
+        configHandler.onLoad(instance);
+        Translation.reload();
     }
 
     /**
