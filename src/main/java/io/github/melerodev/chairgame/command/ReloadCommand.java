@@ -19,6 +19,6 @@ public class ReloadCommand {
 
     private void executorReload(CommandSender sender, CommandArguments args) {
         ChairGame.getInstance().reloadConfig();
-        sender.sendMessage(Translation.as("commands.chairgame.reloaded"));
+        sender.sendMessage(Translation.as("chairgame.reloaded"));
     }
 }

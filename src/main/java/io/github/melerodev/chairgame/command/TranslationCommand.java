@@ -54,13 +54,13 @@ class TranslationCommand {
     }
 
     private void executorHelp(CommandSender sender, CommandArguments args) {
-        sender.sendMessage(Translation.as("commands.translation.help"));
+        sender.sendMessage(Translation.as("chairgame.translation.help"));
     }
 
     private void executorReload(CommandSender sender, CommandArguments args) {
         Translation.setLanguage(Cfg.get().get("language", "en_US"));
         Translation.reload();
-        sender.sendMessage(Translation.as("commands.translation.reloaded"));
+        sender.sendMessage(Translation.as("chairgame.translation.reloaded"));
     }
 
     private void executorTest(CommandSender sender, CommandArguments args) throws WrapperCommandSyntaxException {

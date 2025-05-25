@@ -22,6 +22,6 @@ public class ChairGameCommand {
     }
 
     private void executorReload(CommandSender sender, CommandArguments args) {
-        sender.sendMessage(Translation.as("chairgame.errors.no-arguments"));
+        sender.sendMessage(Translation.as("chairgame.help"));
     }
 }

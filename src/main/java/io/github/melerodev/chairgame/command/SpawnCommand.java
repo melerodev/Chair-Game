@@ -16,7 +16,7 @@ public class SpawnCommand {
 
     protected CommandAPICommand command() {
 
-        return new CommandAPICommand("spawn")
+        return new CommandAPICommand("setspawn")
             .withFullDescription("Set the spawn point things for plugin.")
             .withShortDescription("Set the spawn point things for plugin.")
             .withPermission(BASE_PERM + ".spawn")
@@ -28,7 +28,7 @@ public class SpawnCommand {
 
     private void executeSpawn(CommandSender sender, CommandArguments args) {
         ChairGame.getInstance().reloadConfig();
-        sender.sendMessage(Translation.as("commands.chairgame.errors.no-arguments"));
+        sender.sendMessage(Translation.as("chairgame.help"));
     }
 
     private CommandAPICommand commandLobby() {
@@ -50,9 +50,9 @@ public class SpawnCommand {
             config.set("lobby-spawn-location.yaw", ((Player) sender).getLocation().getYaw());
             config.set("lobby-spawn-location.pitch", ((Player) sender).getLocation().getPitch());
 
-            sender.sendMessage(Translation.as("commands.chairgame.spawn-lobby"));
+            sender.sendMessage(Translation.as("chairgame.spawn-lobby"));
         } else {
-            sender.sendMessage(Translation.as("commands.chairgame.errors.not-from-console"));
+            sender.sendMessage(Translation.as("chairgame.errors.not-from-console"));
         }
     }
 }

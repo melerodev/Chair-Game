@@ -58,13 +58,13 @@ public class UpdateHandler implements Reloadable {
 
             if (watcher.isLatest()) {
                 Logger.get().info(
-                    ColorParser.of(Translation.of("update-checker.running-latest"))
+                    ColorParser.of(Translation.of("plugin.update-checker.running-latest"))
                         .parseMinimessagePlaceholder("plugin_name", plugin.getName())
                         .build()
                 );
             } else {
                 Logger.get().info(
-                    ColorParser.of(Translation.of("update-checker.update-found-console"))
+                    ColorParser.of(Translation.of("plugin.update-checker.update-found-console"))
                         .parseMinimessagePlaceholder("plugin_name", plugin.getName())
                         .parseMinimessagePlaceholder("version_current", watcher.getCurrentVersion().getVersionFull())
                         .parseMinimessagePlaceholder("version_latest", version.getVersionFull())
@@ -74,7 +74,7 @@ public class UpdateHandler implements Reloadable {
             }
         }).exceptionally(throwable -> {
             if (shouldLog)
-                Logger.get().warn(ColorParser.of(Translation.of("update-checker.update-failed")).parseMinimessagePlaceholder("error", throwable.getMessage()).build());
+                Logger.get().warn(ColorParser.of(Translation.of("plugin.update-checker.update-failed")).parseMinimessagePlaceholder("error", throwable.getMessage()).build());
             return null;
         });
 
@@ -98,7 +98,7 @@ public class UpdateHandler implements Reloadable {
                     return;
 
                 p.sendMessage(
-                    ColorParser.of(Translation.of("update-checker.update-found-player"))
+                    ColorParser.of(Translation.of("plugin.update-checker.update-found-player"))
                         .parseMinimessagePlaceholder("plugin_name", plugin.getName())
                         .parseMinimessagePlaceholder("version_current", watcher.getCurrentVersion().getVersionFull())
                         .parseMinimessagePlaceholder("version_latest", watcher.getLatestVersion().getVersionFull())

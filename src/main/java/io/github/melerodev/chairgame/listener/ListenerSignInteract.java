@@ -1,8 +1,12 @@
 package io.github.melerodev.chairgame.listener;
 
 import io.github.melerodev.chairgame.utility.Cfg;
+import io.github.milkdrinkers.crate.Config;
 import io.github.milkdrinkers.wordweaver.Translation;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
@@ -11,9 +15,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import java.util.Objects;
+
 public class ListenerSignInteract implements Listener {
     @EventHandler
-    public void onPlayerInteract(PlayerInteractEvent event) {
+    public void onPlayerInteract(PlayerInteractEvent event) throws IllegalAccessException {
         if (event.getClickedBlock() == null) return;
         if (event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
 
@@ -27,11 +33,37 @@ public class ListenerSignInteract implements Listener {
 
         if (line0.equalsIgnoreCase("[ChairGame]")) {
             Player player = event.getPlayer();
-            if (!Cfg.get().getStringList("allowed-worlds").contains(player.getWorld().getName())) return;
-            player.sendMessage(Translation.as("chairgame.join"));
-//            player.performCommand("sw join");
-            event.setCancelled(true);
+            if (event.getPlayer().hasPermission("chairgame.join") || event.getPlayer().hasPermission("chairgame.admin")) {
+                event.setCancelled(true); // Do not do the default interactions
+                if (!Cfg.get().getStringList("allowed-worlds").contains(player.getWorld().getName())) return;
+
+                Config config = Cfg.get();
+
+                String worldName = config.getString("lobby-spawn-location.world");
+                World world = Bukkit.getWorld(worldName);
+
+                if ((Bukkit.getWorld(config.getString("lobby-spawn-location.world")) == null)) {
+                    player.sendMessage(Translation.as("chairgame.errors.world-not-found"));
+                    return;
+                }
+
+                Location spawnLocation = new Location(
+                    world,
+                    config.getDouble("lobby-spawn-location.x"),
+                    config.getDouble("lobby-spawn-location.y"),
+                    config.getDouble("lobby-spawn-location.z"),
+                    (float) config.getDouble("lobby-spawn-location.yaw"),
+                    (float) config.getDouble("lobby-spawn-location.pitch")
+                );
+
+                player.teleport(spawnLocation);
+                player.sendMessage(Translation.as("chairgame.join"));
+
+                event.setCancelled(true); // Do not do the default interactions
+            } else {
+                player.sendMessage(Translation.as("chairgame.errors.no-permission"));
+                event.setCancelled(true);
+            }
         }
     }
-
 }
