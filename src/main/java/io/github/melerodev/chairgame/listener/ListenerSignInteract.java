@@ -1,5 +1,6 @@
 package io.github.melerodev.chairgame.listener;
 
+import io.github.melerodev.chairgame.permission.Permissions;
 import io.github.melerodev.chairgame.utility.Cfg;
 import io.github.milkdrinkers.crate.Config;
 import io.github.milkdrinkers.wordweaver.Translation;
@@ -15,11 +16,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import java.util.Objects;
-
 public class ListenerSignInteract implements Listener {
     @EventHandler
-    public void onPlayerInteract(PlayerInteractEvent event) throws IllegalAccessException {
+    public void onPlayerInteract(PlayerInteractEvent event) {
         if (event.getClickedBlock() == null) return;
         if (event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
 
@@ -33,8 +32,7 @@ public class ListenerSignInteract implements Listener {
 
         if (line0.equalsIgnoreCase("[ChairGame]")) {
             Player player = event.getPlayer();
-            if (event.getPlayer().hasPermission("chairgame.join") || event.getPlayer().hasPermission("chairgame.admin")) {
-                event.setCancelled(true); // Do not do the default interactions
+            if (event.getPlayer().hasPermission(Permissions.JOIN_PERMISSION.getNode()) || event.getPlayer().hasPermission(Permissions.ADMIN_PERMISSION.getNode())) {
                 if (!Cfg.get().getStringList("allowed-worlds").contains(player.getWorld().getName())) return;
 
                 Config config = Cfg.get();
@@ -44,6 +42,7 @@ public class ListenerSignInteract implements Listener {
 
                 if ((Bukkit.getWorld(config.getString("lobby-spawn-location.world")) == null)) {
                     player.sendMessage(Translation.as("chairgame.errors.world-not-found"));
+                    event.setCancelled(true);
                     return;
                 }
 
@@ -58,7 +57,6 @@ public class ListenerSignInteract implements Listener {
 
                 player.teleport(spawnLocation);
                 player.sendMessage(Translation.as("chairgame.join"));
-
                 event.setCancelled(true); // Do not do the default interactions
             } else {
                 player.sendMessage(Translation.as("chairgame.errors.no-permission"));

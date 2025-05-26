@@ -6,22 +6,20 @@ import io.github.melerodev.chairgame.permission.Permissions;
 import io.github.milkdrinkers.wordweaver.Translation;
 import org.bukkit.command.CommandSender;
 
-public class ChairGameCommand {
-    protected ChairGameCommand() {
-        new CommandAPICommand("chairgame")
+public class AdminCommand {
+    protected CommandAPICommand command() {
+        return new CommandAPICommand("chairgame")
             .withFullDescription("ChairGame command.")
             .withShortDescription("ChairGame command.")
-            .withPermission(Permissions.BASE_PERMISSION.getNode())
+            .withPermission(Permissions.ADMIN_PERMISSION.getNode())
             .withSubcommands(
-                new ReloadCommand().command(),
-                new AdminCommand().command()
+                new SetCommand().command()
             )
             .withAliases("cg", "chairgame")
-            .executes(this::executorReload)
-            .register();
+            .executes(this::executorAdmin);
     }
 
-    private void executorReload(CommandSender sender, CommandArguments args) {
+    private void executorAdmin(CommandSender sender, CommandArguments args) {
         sender.sendMessage(Translation.as("chairgame.help"));
     }
 }
