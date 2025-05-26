@@ -32,6 +32,7 @@ public class ListenerHandler implements Reloadable {
         listeners.clear(); // Clear the list to avoid duplicate listeners when reloading the plugin
 //        listeners.add(new ExampleListener());
         listeners.add(new ListenerSignInteract());
+        listeners.add(new ListenerSignChange());
 
         // Register listeners here
         for (Listener listener : listeners) {

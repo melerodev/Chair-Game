@@ -21,7 +21,8 @@
       "errors": {
         "not-from-console": "<red>¡Este comando no puede ser ejecutado desde la consola!",
         "no-permission": "<red>¡No tienes permiso para utilizar esto!",
-        "world-not-found": "<red>¡El mundo para teletransportar a los jugadores al lobby no existe o es nulo!"
+        "world-not-found": "<red>¡El mundo para teletransportar a los jugadores al lobby no existe o es nulo!",
+        "world-not-allowed": "<red>¡No puedes añadir señales de <plugin_name> en este mundo!"
       }
     }
   }

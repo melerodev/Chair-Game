@@ -8,14 +8,13 @@ import org.bukkit.command.CommandSender;
 
 public class AdminCommand {
     protected CommandAPICommand command() {
-        return new CommandAPICommand("chairgame")
+        return new CommandAPICommand("admin")
             .withFullDescription("ChairGame command.")
             .withShortDescription("ChairGame command.")
             .withPermission(Permissions.ADMIN_PERMISSION.getNode())
             .withSubcommands(
                 new SetCommand().command()
             )
-            .withAliases("cg", "chairgame")
             .executes(this::executorAdmin);
     }
 
