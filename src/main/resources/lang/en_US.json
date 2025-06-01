@@ -11,20 +11,20 @@
     "translation": {
       "help": "\n<white>Subcomandos de traducción:\n  <dark_gray>• <white>reload: <gray><i>Recarga los archivos de traducción.\n  <dark_gray>• <white>test <node>: <gray><i>Prueba una traducción.\n",
       "reloaded": "<green>¡Traducciones recargadas correctamente!"
-    },
-    "chairgame": {
-      "help": "<red>¡Debes especificar más argumentos!",
-      "reloaded": "<green>¡Configuración de ChairGame recargada correctamente!",
-      "join": "<green>Uniéndose a ChairGame...",
-      "leave": "<green>Saliendo de ChairGame...",
-      "spawn-lobby": "<green>El spawn para el lobby de ChairGame ha sido establecido.",
-      "spawn-player": "<green>Se el spawn para jugadores Nº: ",
-      "errors": {
-        "not-from-console": "<red>¡Este comando no puede ser ejecutado desde la consola!",
-        "no-permission": "<red>¡No tienes permiso para utilizar esto!",
-        "world-not-found": "<red>¡El mundo para teletransportar a los jugadores al lobby no existe o es nulo!",
-        "world-not-allowed": "<red>¡No puedes añadir señales de <plugin_name> en este mundo!"
-      }
+    }
+  },
+  "chairgame": {
+    "help": "<red>¡Debes especificar más argumentos!",
+    "reloaded": "<green>¡Configuración de ChairGame recargada correctamente!",
+    "join": "<green>Uniéndose a ChairGame...",
+    "leave": "<green>Saliendo de ChairGame...",
+    "spawn-lobby": "<green>El spawn para el lobby de ChairGame ha sido establecido.",
+    "spawn-player": "<green>Se el spawn para jugadores Nº: ",
+    "errors": {
+      "not-from-console": "<red>¡Este comando no puede ser ejecutado desde la consola!",
+      "no-permission": "<red>¡No tienes permiso para utilizar esto!",
+      "world-not-found": "<red>¡El mundo para teletransportar a los jugadores al lobby no existe o es nulo!",
+      "world-not-allowed": "<red>¡No puedes añadir señales de <plugin_name> en este mundo!"
     }
   }
 }

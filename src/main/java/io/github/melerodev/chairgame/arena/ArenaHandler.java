@@ -2,6 +2,7 @@ package io.github.melerodev.chairgame.arena;
 
 import io.github.melerodev.chairgame.ChairGame;
 import io.github.melerodev.chairgame.Reloadable;
+import io.github.melerodev.chairgame.command.AdminCommand;
 import io.github.milkdrinkers.crate.Config;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -36,7 +37,13 @@ public class ArenaHandler implements Reloadable {
     public void onDisable(ChairGame plugin) {
     }
 
+    public void onReload() {
+        loadArenas();
+        new AdminCommand().register();
+    }
+
     private void loadArenas() {
+        arenas.clear();
         if (arenasFolder.exists()) {
             File[] files = arenasFolder.listFiles();
             if (files != null) {

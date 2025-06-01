@@ -111,7 +111,9 @@ public class ChairGame extends JavaPlugin {
 
     public void reloadConfig() {
         configHandler.onLoad(instance);
+        arenaHandler.onReload();
         Translation.reload();
+
     }
 
     /**
@@ -130,7 +132,7 @@ public class ChairGame extends JavaPlugin {
      * @return the config handler
      */
     @NotNull
-    public ArenaHandler getArenaManager() {
+    public ArenaHandler getArenaHandler() {
         return arenaHandler;
     }
 

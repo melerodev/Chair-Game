@@ -63,7 +63,7 @@ public class SpawnCommand {
 
     private void executorSetSpawnPlayer(CommandSender sender, CommandArguments args) {
         if (sender instanceof Player) {
-            sender.sendMessage(Translation.as("commands.chairgame.spawn-player"));
+            sender.sendMessage(Translation.as("chairgame.spawn-player"));
         } else {
             sender.sendMessage(Translation.as("chairgame.errors.not-from-console"));
         }
