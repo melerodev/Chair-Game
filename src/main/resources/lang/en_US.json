@@ -18,6 +18,7 @@
       "join": "<green>Uniéndose a ChairGame...",
       "leave": "<green>Saliendo de ChairGame...",
       "spawn-lobby": "<green>El spawn para el lobby de ChairGame ha sido establecido.",
+      "spawn-player": "<green>Se el spawn para jugadores Nº: ",
       "errors": {
         "not-from-console": "<red>¡Este comando no puede ser ejecutado desde la consola!",
         "no-permission": "<red>¡No tienes permiso para utilizar esto!",

@@ -3,7 +3,6 @@ package io.github.melerodev.chairgame.config;
 import io.github.melerodev.chairgame.ChairGame;
 import io.github.melerodev.chairgame.Reloadable;
 import io.github.milkdrinkers.crate.Config;
-
 import java.io.File;
 
 /**
@@ -32,6 +31,7 @@ public class ConfigHandler implements Reloadable {
         File databaseFile = new File(plugin.getDataFolder(), "database.yml");
         if (databaseFile.exists()) databaseFile.delete();
         databaseCfg = new Config("database", plugin.getDataFolder().getPath(), plugin.getResource("database.yml"));
+
     }
 
 //    @Override

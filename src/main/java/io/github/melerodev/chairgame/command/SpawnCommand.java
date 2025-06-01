@@ -63,16 +63,7 @@ public class SpawnCommand {
 
     private void executorSetSpawnPlayer(CommandSender sender, CommandArguments args) {
         if (sender instanceof Player) {
-            Config config = Cfg.get();
-
-            config.set("game-spawn-location.world", ((Player) sender).getWorld().getName());
-            config.set("game-spawn-location.x", ((Player) sender).getLocation().getX());
-            config.set("game-spawn-location.y", ((Player) sender).getLocation().getY());
-            config.set("game-spawn-location.z", ((Player) sender).getLocation().getZ());
-            config.set("game-spawn-location.yaw", ((Player) sender).getLocation().getYaw());
-            config.set("game-spawn-location.pitch", ((Player) sender).getLocation().getPitch());
-
-            sender.sendMessage(Translation.as("chairgame.spawn-game"));
+            sender.sendMessage(Translation.as("commands.chairgame.spawn-player"));
         } else {
             sender.sendMessage(Translation.as("chairgame.errors.not-from-console"));
         }

@@ -13,7 +13,8 @@ public class AdminCommand {
             .withShortDescription("ChairGame command.")
             .withPermission(Permissions.ADMIN_PERMISSION.getNode())
             .withSubcommands(
-                new SetCommand().command()
+//                new SetCommand().command()
+
             )
             .executes(this::executorAdmin);
     }

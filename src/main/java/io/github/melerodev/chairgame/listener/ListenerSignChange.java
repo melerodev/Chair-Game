@@ -18,7 +18,7 @@ public class ListenerSignChange implements Listener {
     @EventHandler
     public void onSignChange(SignChangeEvent event) {
         Player player = event.getPlayer();
-        Component line = event.line(0); // Cada línea de texto (máximo 4)
+        Component line = event.line(0);
 
         assert line != null;
         if (PLAIN_SERIALIZER.serialize(line).equalsIgnoreCase("[ChairGame]")) {

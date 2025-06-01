@@ -1,0 +1,10 @@
+name: lobby
+world: world
+pos1: 100,64,100
+pos2: 102,64,102
+minPlayers: 2
+maxPlayers: 10
+locations:
+  lobbySpawn: world,100,64,100
+  chair: world,101,64,100
+  player: world,102,64,100

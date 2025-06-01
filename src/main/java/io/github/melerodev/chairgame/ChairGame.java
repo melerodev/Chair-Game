@@ -1,5 +1,6 @@
 package io.github.melerodev.chairgame;
 
+import io.github.melerodev.chairgame.arena.ArenaHandler;
 import io.github.melerodev.chairgame.command.CommandHandler;
 import io.github.melerodev.chairgame.config.ConfigHandler;
 import io.github.melerodev.chairgame.database.handler.DatabaseHandler;
@@ -35,6 +36,7 @@ public class ChairGame extends JavaPlugin {
     private ListenerHandler listenerHandler;
     private UpdateHandler updateHandler;
     private SchedulerHandler schedulerHandler;
+    private ArenaHandler arenaHandler;
 
     // Handlers list (defines order of load/enable/disable)
     private List<? extends Reloadable> handlers;
@@ -62,6 +64,7 @@ public class ChairGame extends JavaPlugin {
         listenerHandler = new ListenerHandler(this);
         updateHandler = new UpdateHandler(this);
         schedulerHandler = new SchedulerHandler();
+        arenaHandler = new ArenaHandler(this);
 
         handlers = List.of(
             configHandler,
@@ -71,7 +74,8 @@ public class ChairGame extends JavaPlugin {
             commandHandler,
             listenerHandler,
             updateHandler,
-            schedulerHandler
+            schedulerHandler,
+            arenaHandler
         );
 
         DB.init(databaseHandler);
@@ -118,6 +122,16 @@ public class ChairGame extends JavaPlugin {
     @NotNull
     public ConfigHandler getConfigHandler() {
         return configHandler;
+    }
+
+    /**
+     * Gets config handler.
+     *
+     * @return the config handler
+     */
+    @NotNull
+    public ArenaHandler getArenaManager() {
+        return arenaHandler;
     }
 
     /**
