@@ -32,7 +32,7 @@ public class ArenaHandler implements Reloadable {
     public void onDisable(ChairGame plugin) {}
 
     public void reload() {
-        this.arenas = repository.loadAll();
+        onLoad(plugin);
     }
 
     public void removeArena(String name) {
