@@ -3,21 +3,24 @@ package io.github.melerodev.chairgame.arena;
 import io.github.melerodev.chairgame.ChairGame;
 import io.github.melerodev.chairgame.Reloadable;
 import io.github.milkdrinkers.crate.Config;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
-
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ArenaHandler implements Reloadable {
     private final ChairGame plugin;
-    public List<Arena> arenas;
+    @Getter
+    private List<Arena> arenas;
     private final File arenasFolder;
 
     public ArenaHandler(ChairGame plugin) {
         this.plugin = plugin;
         this.arenasFolder = new File(plugin.getDataFolder(), "arenas");
+        this.arenas = new ArrayList<>();
     }
 
     @Override
@@ -36,7 +39,7 @@ public class ArenaHandler implements Reloadable {
     private void loadArenas() {
         if (arenasFolder.exists()) {
             File[] files = arenasFolder.listFiles();
-            if (files != null && files.length > 0) {
+            if (files != null) {
                 for (File file : files) {
                     if (file.isFile() && file.getName().endsWith(".yml")) {
                         Config config = new Config(file);
@@ -46,10 +49,10 @@ public class ArenaHandler implements Reloadable {
                         // GET THE POSITION1
                         String[] pos1Parts = config.getString("pos1").split(",");
                         Location post1 = new Location(
-                                                            world /*world*/,
-                                                            Double.parseDouble(pos1Parts[0]) /*x*/,
-                                                            Double.parseDouble(pos1Parts[1]) /*y*/,
-                                                            Double.parseDouble(pos1Parts[2]) /*z*/
+                            world /*world*/,
+                            Double.parseDouble(pos1Parts[0]) /*x*/,
+                            Double.parseDouble(pos1Parts[1]) /*y*/,
+                            Double.parseDouble(pos1Parts[2]) /*z*/
                         );
 
                         // GET THE POSITION2
@@ -64,23 +67,26 @@ public class ArenaHandler implements Reloadable {
                         int minPlayers = config.getInt("minPlayers");
                         int maxPlayers = config.getInt("maxPlayers");
 
-                        String[] locationParts = config.getString("lobbySpawn").split(",");
+                        String[] locationParts = config.getString("spawns.lobbySpawn").split(",");
                         Location lobbySpawn = new Location(
-                                                            Bukkit.getWorld(locationParts[0]) /*world*/,
-                                                            Double.parseDouble(locationParts[1]) /*y*/,
-                                                            Double.parseDouble(locationParts[2])  /*z*/,
-                                                            Double.parseDouble(locationParts[3]) /*x*/,
-                                                            Float.parseFloat(locationParts[4]) /*yaw*/,
-                                                            Float.parseFloat(locationParts[5]) /*pitch*/
+                            Bukkit.getWorld(locationParts[0]) /*world*/,
+                            Double.parseDouble(locationParts[1]) /*y*/,
+                            Double.parseDouble(locationParts[2])  /*z*/,
+                            Double.parseDouble(locationParts[3]) /*x*/,
+                            Float.parseFloat(locationParts[4]) /*yaw*/,
+                            Float.parseFloat(locationParts[5]) /*pitch*/
                         );
 
                         Arena arena = new Arena(name, world, minPlayers, maxPlayers);
+                        arena.setPositions(post1, pos2);
                         arena.setLobbySpawn(lobbySpawn);
+
+                        arenas.add(arena);
+                        System.out.println("Arena " + name + " has been loaded successfully.");
                     }
                 }
             }
         }
-
     }
 
     public void removeArena(Arena arena) {
@@ -99,9 +105,5 @@ public class ArenaHandler implements Reloadable {
         if (!arenaFolder.exists()) arenaFolder.mkdir();
 
         System.out.println("Se creado el minijuego:" + name + "-" + uuid);
-    }
-
-    public List<Arena> getArenas() {
-        return arenas;
     }
 }

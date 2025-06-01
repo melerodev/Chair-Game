@@ -1,13 +1,13 @@
 package io.github.melerodev.chairgame.arena;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Location;
 import org.bukkit.World;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
-public @Data class Arena {
+public @Getter class Arena {
     private final String name;
     private final World world;
     private final int minPlayers;
@@ -15,8 +15,9 @@ public @Data class Arena {
     private Location pos1;
     private Location pos2;
     private boolean isActive;
+    @Setter
     private Location lobbySpawn;
-    private final Map<UUID, Location> playerLocations = new HashMap<>();
+    private final Map<String, Location> playerSpawns = new HashMap<>();
     private final Map<String, Location> chairsLocations = new HashMap<>();
 
     public static final String RE_ARENA_NAME = "^[a-zA-Z0-9_]{3,16}$";
@@ -51,15 +52,12 @@ public @Data class Arena {
         this.pos2 = pos2;
     }
 
-//    public void setLobbySpawn(Location lobbySpawn) {
-//        this.lobbySpawn = lobbySpawn;
-//    }
-
-    public void addPlayer(UUID uuid, Location spawnLocation) {
-        if (playerLocations.size() >= maxPlayers) {
+    public void addPlayerSpawn(Location spawnLocation) {
+        String numPlayerLocation = "";
+        if (playerSpawns.size() >= maxPlayers) {
             throw new IllegalStateException("Arena is full, cannot add more players.");
         }
-        playerLocations.put(uuid, spawnLocation);
+        playerSpawns.put(numPlayerLocation, spawnLocation);
     }
 
     public void addChair(String id, Location location) {
@@ -76,13 +74,13 @@ public @Data class Arena {
 
     public void stopGame() {
         isActive = false;
-        playerLocations.clear();
+        playerSpawns.clear();
         // lógica de limpieza
     }
 
     public boolean isReady() {
         return pos1 != null && pos2 != null && lobbySpawn != null
-                && !chairsLocations.isEmpty() && playerLocations.size() >= minPlayers;
+                && !chairsLocations.isEmpty() && playerSpawns.size() >= minPlayers;
     }
 }
 

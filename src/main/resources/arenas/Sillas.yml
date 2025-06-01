@@ -4,7 +4,13 @@ pos1: 100,64,100
 pos2: 102,64,102
 minPlayers: 2
 maxPlayers: 10
-locations:
-  lobbySpawn: world,100,64,100
-  chair: world,101,64,100
-  player: world,102,64,100
+spawns:
+  lobbySpawn: world,100.0,64.0,100.0,90.0,0.0
+  players:
+    - 100,64,100
+    - 101,64,101
+    - 102,64,102
+  chairs:
+    - 100,64,100
+    - 101,64,101
+    - 102,64,102
