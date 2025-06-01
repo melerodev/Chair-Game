@@ -1,6 +1,7 @@
 package io.github.melerodev.chairgame;
 
 import io.github.melerodev.chairgame.arena.ArenaHandler;
+import io.github.melerodev.chairgame.command.AdminCommand;
 import io.github.melerodev.chairgame.command.CommandHandler;
 import io.github.melerodev.chairgame.config.ConfigHandler;
 import io.github.melerodev.chairgame.database.handler.DatabaseHandler;
@@ -74,8 +75,7 @@ public class ChairGame extends JavaPlugin {
             commandHandler,
             listenerHandler,
             updateHandler,
-            schedulerHandler,
-            arenaHandler
+            schedulerHandler
         );
 
         DB.init(databaseHandler);
@@ -87,6 +87,9 @@ public class ChairGame extends JavaPlugin {
     public void onEnable() {
         for (Reloadable handler : handlers)
             handler.onEnable(instance);
+
+            arenaHandler.onLoad(instance);
+            arenaHandler.onEnable(instance);
 
         if (!DB.isReady()) {
             Logger.get().warn(ColorParser.of("<yellow>DatabaseHolder handler failed to start. Database support has been disabled.").build());
@@ -112,8 +115,8 @@ public class ChairGame extends JavaPlugin {
     public void reloadConfig() {
         configHandler.onLoad(instance);
         arenaHandler.reload();
+        new AdminCommand().register();
         Translation.reload();
-
     }
 
     /**

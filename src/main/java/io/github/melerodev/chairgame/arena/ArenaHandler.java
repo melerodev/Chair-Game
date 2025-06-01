@@ -2,8 +2,8 @@ package io.github.melerodev.chairgame.arena;
 
 import io.github.melerodev.chairgame.ChairGame;
 import io.github.melerodev.chairgame.Reloadable;
-import io.github.melerodev.chairgame.command.AdminCommand;
 import lombok.Getter;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,20 +26,17 @@ public class ArenaHandler implements Reloadable {
     }
 
     @Override
-    public void onEnable(ChairGame plugin) {
-    }
+    public void onEnable(ChairGame plugin) {}
 
     @Override
-    public void onDisable(ChairGame plugin) {
-    }
+    public void onDisable(ChairGame plugin) {}
 
     public void reload() {
-        onLoad(plugin);
-        new AdminCommand().register();
+        this.arenas = repository.loadAll();
     }
 
     public void removeArena(String name) {
         repository.delete(name);
-        arenas.removeIf(arena -> arena.getName().equalsIgnoreCase(name));
+        arenas.removeIf(a -> a.getName().equals(name));
     }
 }
