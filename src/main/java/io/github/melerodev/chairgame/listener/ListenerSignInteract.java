@@ -1,5 +1,7 @@
 package io.github.melerodev.chairgame.listener;
 
+import io.github.melerodev.chairgame.ChairGame;
+import io.github.melerodev.chairgame.arena.ArenaRepository;
 import io.github.melerodev.chairgame.permission.Permissions;
 import io.github.melerodev.chairgame.utility.Cfg;
 import io.github.milkdrinkers.crate.Config;
@@ -32,9 +34,6 @@ public class ListenerSignInteract implements Listener {
         Block block = event.getClickedBlock();
         Sign sign = (Sign) block.getState();
 
-//        String line0 = sign.getLine(0).trim();
-
-
         String line0 = PLAIN_SERIALIZER
             .serialize(sign.getSide(Side.FRONT).line(0)) // sign debe ser org.bukkit.block.Sign (en Paper)
             .trim();
@@ -42,29 +41,14 @@ public class ListenerSignInteract implements Listener {
         if (line0.equalsIgnoreCase("[ChairGame]")) {
             Player player = event.getPlayer();
             if (event.getPlayer().hasPermission(Permissions.JOIN_PERMISSION.getNode()) || event.getPlayer().hasPermission(Permissions.ADMIN_PERMISSION.getNode())) {
-                if (!Cfg.get().getStringList("allowed-worlds").contains(player.getWorld().getName())) return;
-
-                Config config = Cfg.get();
-
-                String worldName = config.getString("lobby-spawn-location.world");
-                World world = Bukkit.getWorld(worldName);
-
-                if ((Bukkit.getWorld(config.getString("lobby-spawn-location.world")) == null)) {
-                    player.sendMessage(Translation.as("chairgame.errors.world-not-found"));
+                if (!Cfg.get().getStringList("allowed-worlds").contains(player.getWorld().getName())) {
+                    player.sendMessage(Translation.as("chairgame.errors.world-not-allowed"));
                     event.setCancelled(true);
                     return;
-                }
+                };
 
-                Location spawnLocation = new Location(
-                    world,
-                    config.getDouble("lobby-spawn-location.x"),
-                    config.getDouble("lobby-spawn-location.y"),
-                    config.getDouble("lobby-spawn-location.z"),
-                    (float) config.getDouble("lobby-spawn-location.yaw"),
-                    (float) config.getDouble("lobby-spawn-location.pitch")
-                );
+                player.teleport(ChairGame.getInstance().getArenaHandler().getArenaByName("Sillas").get().getLobbySpawn());
 
-                player.teleport(spawnLocation);
                 player.sendMessage(Translation.as("chairgame.join"));
                 event.setCancelled(true); // Do not do the default interactions
             } else {

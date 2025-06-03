@@ -2,8 +2,19 @@ package io.github.melerodev.chairgame.command;
 
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
+import dev.jorel.commandapi.CommandAPICommand;
+import dev.jorel.commandapi.executors.CommandArguments;
 import io.github.melerodev.chairgame.ChairGame;
 import io.github.melerodev.chairgame.Reloadable;
+import io.github.melerodev.chairgame.arena.Arena;
+import io.github.melerodev.chairgame.permission.Permissions;
+import io.github.milkdrinkers.crate.Config;
+import io.github.milkdrinkers.wordweaver.Translation;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+import java.io.File;
+import java.util.Optional;
 
 /**
  * A class to handle registration of commands.

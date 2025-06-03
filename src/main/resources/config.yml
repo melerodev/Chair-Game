@@ -10,12 +10,3 @@ language: "en_US"
 # Put here the worlds where the plugin is allowed to frun.
 allowed-worlds:
   - "world"
-
-# Edit here the spawn location of the plugin.
-lobby-spawn-location:
-  world:
-  x:
-  y:
-  z:
-  yaw:
-  pitch:
